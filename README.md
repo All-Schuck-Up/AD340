@@ -2,4 +2,6 @@
 # Ryan Schuck
  Simple Hello world app
  
+ Week-2 Update:  Added ZipCode input functionality
+ 
  
