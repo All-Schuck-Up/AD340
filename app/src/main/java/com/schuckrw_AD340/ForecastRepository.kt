@@ -2,32 +2,33 @@ package com.schuckrw_AD340
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import java.util.Date
 import kotlin.random.Random
 
 class ForecastRepository {
 
-    private val _weeklyforecast = MutableLiveData<List<DailyForecast>>()
-    val weeklyForecast: LiveData<List<DailyForecast>> = _weeklyforecast
+    private val _weeklyForecast = MutableLiveData<List<DailyForecast>>()
+    val weeklyForecast: LiveData<List<DailyForecast>> = _weeklyForecast
 
     fun loadForecast(zipcode: String) {
-        val randomValues = List(10) { Random.nextFloat().rem(100) * 100 }
-        val forecastItems = randomValues.map { temp ->
-            DailyForecast(temp, getTempDescription(temp))
+        val randomValues = List(7) { Random.nextFloat().rem(100) * 100 }
+        val forecastItems = randomValues.map {
+            DailyForecast(Date(), it, getTempDescription(it))
         }
-        _weeklyforecast.setValue(forecastItems)
+        _weeklyForecast.setValue(forecastItems)
     }
 
     private fun getTempDescription(temp: Float) : String {
         return when (temp) {
             in Float.MIN_VALUE.rangeTo(0f) -> "Anything below 0 doesn't make sense"
-            in 0f.rangeTo(32f) -> "I would stay by the fire!"
-            in 32f.rangeTo(55f) -> "Bundle up, it's chilly"
-            in 55f.rangeTo(65f) -> "This is an improvement"
-            in 65f.rangeTo(80f) -> "Get that boat out on the water!"
-            in 80f.rangeTo(90f) -> "Dig out the A/C"
-            in 90f.rangeTo(Float.MAX_VALUE) -> "Look at the sun from an cooled room"
+            in 0f.rangeTo(32f) -> "Stay close to the fire"
+            in 32f.rangeTo(55f) -> "Still to cold"
+            in 55f.rangeTo(65f) -> "Improving"
+            in 65f.rangeTo(80f) -> "Perfection!"
+            in 80f.rangeTo(90f) -> "Getting a little warm"
+            in 90f.rangeTo(100f) -> "Where's the A/C?"
+            in 100f.rangeTo(Float.MAX_VALUE) -> "Nope, just stay inside?"
             else -> "Does not compute"
         }
     }
-
 }
