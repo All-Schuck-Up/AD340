@@ -1,6 +1,9 @@
 package com.schuckrw_AD340
 
 import android.content.Context
+import androidx.core.content.edit
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 enum class TempDisplaySetting {
     Fahrenheit, Celsius
@@ -11,7 +14,6 @@ class TempDisplaySettingManager(context: Context) {
 
     fun updateSetting(setting: TempDisplaySetting) {
         preferences.edit().putString("key_temp_display", setting.name).commit()
-
     }
 
     fun getTempDisplaySetting() : TempDisplaySetting {
