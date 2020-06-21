@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ForecastDetailsFragment : Fragment() {
+
     private val args: ForecastDetailsFragmentArgs by navArgs()
 
     private lateinit var viewModelFactory: ForecastDetailsViewModelFactory
@@ -42,7 +43,6 @@ class ForecastDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewStateObserver = Observer<ForecastDetailsViewState> { viewState ->
-            // update UI
             binding.tempText.text = formatTempForDisplay(viewState.temp, tempDisplaySettingManager.getTempDisplaySetting())
             binding.descriptionText.text = viewState.description
             binding.dateText.text = viewState.date
